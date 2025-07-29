@@ -1,11 +1,14 @@
 import { Link } from "expo-router";
-import {View,Text} from "react-native";
-
-export default function Index(){
+import { View, Text } from "react-native";
+import { Image } from 'expo-image';
+import ImageViewer from '~/components/ImageViewer';
+const PlaceholderImage = require('~/assets/images/background-image.png');
+export default function Index() {
     return (
         <View className={'flex-1 bg-[#25292e] justify-center items-center'}>
-            <Text className={'text-#fff'}></Text>
-            <Link href='/about' className="text-20 text-[#fff] text-underline">关于</Link>
+            <View className="flex-1">
+                <ImageViewer imgSource={PlaceholderImage} />
+            </View>
         </View>
     )
 }
