@@ -6,10 +6,12 @@ import {useState} from "react";
 import IconButton from '@/components/IconButton';
 import CircleButton from '@/components/CircleButton';
 import { func } from 'ts-interface-checker';
+import EmojiPicker from '@/components/EmojiPicker';
 const PlaceholderImage = require('@/assets/images/background-image.png');
 export default function Index() {
     const [selectedImage, setSelectedImage] = useState<string|undefined>(undefined);
     const [showAppOptions, setShowAppOptions] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const PickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes:['images'],
@@ -27,7 +29,10 @@ export default function Index() {
       setShowAppOptions(false);
     }
     function onAddSticker(){
-
+      setIsModalVisible(true);
+    }
+    function onModalClose(){
+      setIsModalVisible(false);
     }
     function onSaveImageAsync(){}
     return (
@@ -49,6 +54,7 @@ export default function Index() {
                     <Button label={'Use this photo'} theme={'secondary'} onPress={()=>setShowAppOptions(true)}/>
                 </View>)
             }
+            <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}></EmojiPicker>
         </View>
     )
 }
