@@ -3,6 +3,9 @@ import ImageViewer from '@/components/ImageViewer';
 import Button from '@/components/Button';
 import * as ImagePicker from 'expo-image-picker';
 import {useState} from "react";
+import IconButton from '@/components/IconButton';
+import CircleButton from '@/components/CircleButton';
+import { func } from 'ts-interface-checker';
 const PlaceholderImage = require('@/assets/images/background-image.png');
 export default function Index() {
     const [selectedImage, setSelectedImage] = useState<string|undefined>(undefined);
@@ -20,13 +23,28 @@ export default function Index() {
             alert('You did not select any image.')
         }
     }
+    function onReset(){
+      setShowAppOptions(false);
+    }
+    function onAddSticker(){
+
+    }
+    function onSaveImageAsync(){}
     return (
         <View className={'flex-1 bg-[#25292e] justify-center items-center'}>
             <View className="flex-1">
                 <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage}/>
             </View>
             {
-                showAppOptions ? (<View />) :(<View className={'basis-[1/3] items-center'}>
+                showAppOptions ? (
+                  <View className={'absolute bottom-[80px]'}>
+                    <View className={'items-center flex-row'}>
+                      <IconButton icon={'refresh'} label={'Reset'} onPress={onReset} />
+                      <CircleButton onPress={onAddSticker} />
+                      <IconButton icon={'save-alt'} label={'Save'} onPress={onSaveImageAsync} />
+                    </View>
+                  </View>
+                ) :(<View className={'basis-[1/3] items-center'}>
                     <Button label={'Choose a photo'} theme={'primary'} onPress={PickImageAsync}/>
                     <Button label={'Use this photo'} theme={'secondary'} onPress={()=>setShowAppOptions(true)}/>
                 </View>)
