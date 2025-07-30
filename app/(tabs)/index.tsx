@@ -59,30 +59,32 @@ export default function Index() {
       }
     }
     return (
-        <GestureHandlerRootView className={'flex-1 bg-[#25292e] justify-center items-center'}>
-            <View className="flex-1">
-              <View ref={imageRef} collapsable={false}>
-                <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage}/>
-                {pickedEmoji && <EmojiSticker imageSize={100} stickerSource={pickedEmoji}/>}
-              </View>
-            </View>
-            {
-              showAppOptions ? (
-                <View className={'absolute bottom-[80px]'}>
-                  <View className={'items-center flex-row'}>
-                    <IconButton icon={'refresh'} label={'Reset'} onPress={onReset} />
-                    <CircleButton onPress={onAddSticker} />
-                    <IconButton icon={'save-alt'} label={'Save'} onPress={onSaveImageAsync} />
-                  </View>
-                </View>
-              ) :(<View className={'basis-[1/3] items-center'}>
-                <Button label={'Choose a photo'} theme={'primary'} onPress={PickImageAsync}/>
-                <Button label={'Use this photo'} theme={'secondary'} onPress={()=>setShowAppOptions(true)}/>
-              </View>)
-            }
-            <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-              <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
-            </EmojiPicker>
+        <GestureHandlerRootView>
+           <View className={'flex-1 bg-[#25292e] justify-center items-center'}>
+             <View className="flex-1">
+               <View ref={imageRef} collapsable={false}>
+                 <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage}/>
+                 {pickedEmoji && <EmojiSticker imageSize={100} stickerSource={pickedEmoji}/>}
+               </View>
+             </View>
+             {
+               showAppOptions ? (
+                 <View className={'absolute bottom-[80px]'}>
+                   <View className={'items-center flex-row'}>
+                     <IconButton icon={'refresh'} label={'Reset'} onPress={onReset} />
+                     <CircleButton onPress={onAddSticker} />
+                     <IconButton icon={'save-alt'} label={'Save'} onPress={onSaveImageAsync} />
+                   </View>
+                 </View>
+               ) :(<View className={'basis-[1/3] items-center'}>
+                 <Button label={'Choose a photo'} theme={'primary'} onPress={PickImageAsync}/>
+                 <Button label={'Use this photo'} theme={'secondary'} onPress={()=>setShowAppOptions(true)}/>
+               </View>)
+             }
+             <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+               <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+             </EmojiPicker>
+           </View>
         </GestureHandlerRootView>
     )
 }

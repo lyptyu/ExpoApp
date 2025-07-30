@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^7.0.5",
     "@react-navigation/drawer": "^7.0.0",
     "@react-navigation/native": "^7.0.3",
+    "dom-to-image": "^2.6.0",
     "expo": "~53.0.20",
     "expo-constants": "~17.1.4",
     "expo-image": "~2.4.0",
