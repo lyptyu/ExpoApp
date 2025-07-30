@@ -1,17 +1,18 @@
-import { View } from "react-native";
+import { ImageSourcePropType, View } from 'react-native';
 import ImageViewer from '@/components/ImageViewer';
 import Button from '@/components/Button';
 import * as ImagePicker from 'expo-image-picker';
 import {useState} from "react";
 import IconButton from '@/components/IconButton';
 import CircleButton from '@/components/CircleButton';
-import { func } from 'ts-interface-checker';
+import EmojiList from '@/components/EmojiList';
 import EmojiPicker from '@/components/EmojiPicker';
 const PlaceholderImage = require('@/assets/images/background-image.png');
 export default function Index() {
     const [selectedImage, setSelectedImage] = useState<string|undefined>(undefined);
     const [showAppOptions, setShowAppOptions] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [pickedEmoji, setPickedEmoji] = useState<ImageSourcePropType|undefined>(undefined);
     const PickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes:['images'],
@@ -54,7 +55,9 @@ export default function Index() {
                     <Button label={'Use this photo'} theme={'secondary'} onPress={()=>setShowAppOptions(true)}/>
                 </View>)
             }
-            <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}></EmojiPicker>
+            <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+              <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+            </EmojiPicker>
         </View>
     )
 }
