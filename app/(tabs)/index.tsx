@@ -6,6 +6,7 @@ import {useState} from "react";
 const PlaceholderImage = require('@/assets/images/background-image.png');
 export default function Index() {
     const [selectedImage, setSelectedImage] = useState<string|undefined>(undefined);
+    const [showAppOptions, setShowAppOptions] = useState(false);
     const PickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes:['images'],
@@ -14,6 +15,7 @@ export default function Index() {
         })
         if (!result.canceled) {
             setSelectedImage(result.assets[0].uri);
+            setShowAppOptions(true);
         } else {
             alert('You did not select any image.')
         }
@@ -23,10 +25,12 @@ export default function Index() {
             <View className="flex-1">
                 <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage}/>
             </View>
-            <View className={'basis-[1/3] items-center'}>
-                <Button label={'Choose a photo'} theme={'primary'} onPress={PickImageAsync}/>
-                <Button label={'Use this photo'} theme={'secondary'}/>
-            </View>
+            {
+                showAppOptions ? (<View />) :(<View className={'basis-[1/3] items-center'}>
+                    <Button label={'Choose a photo'} theme={'primary'} onPress={PickImageAsync}/>
+                    <Button label={'Use this photo'} theme={'secondary'} onPress={()=>setShowAppOptions(true)}/>
+                </View>)
+            }
         </View>
     )
 }

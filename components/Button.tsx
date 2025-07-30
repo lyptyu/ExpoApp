@@ -21,7 +21,7 @@ export default function Button({ label, theme, onPress }: Props) {
     }
     return(
         <View className={'w-[320px] h-[68px] mx-[20px] items-center justify-center p-[3px]'}>
-            <Pressable className={'rounded-[10px] w-full h-full items-center justify-center flex-row'}>
+            <Pressable className={'rounded-[10px] w-full h-full items-center justify-center flex-row'} onPress={onPress}>
                 <Text className={'text-[#fff] text-[16px]'}>{label}</Text>
             </Pressable>
         </View>
