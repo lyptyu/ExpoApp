@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {FlatList, ImageSourcePropType, Platform, Pressable} from "react-native";
-import {Image} from "expo-image";
+import {FlatList, ImageSourcePropType, Platform, Pressable,Text, Image} from "react-native";
+
 type Props = {
     onSelect:(item:ImageSourcePropType)=>void;
     onCloseModal:()=>void
